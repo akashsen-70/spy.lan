@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Encoder/Decoder</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+        button { padding: 10px 20px; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Message Encoder/Decoder</h1>
+    <p>Enter your message below to encode it into hidden symbols, or paste encoded text to decode it.</p>
+    
+    <label for="input">Input Text:</label>
+    <textarea id="input" placeholder="Type your message here..."></textarea>
+    
+    <button onclick="encode()">Encode</button>
+    <button onclick="decode()">Decode</button>
+    
+    <label for="output">Output:</label>
+    <textarea id="output" readonly placeholder="Encoded or decoded result will appear here..."></textarea>
+
+    <script>
+        function encode() {
+            const input = document.getElementById('input').value;
+            if (input) {
+                const encoded = btoa(input); // Base64 encode
+                document.getElementById('output').value = encoded;
+            } else {
+                alert('Please enter some text to encode.');
+            }
+        }
+
+        function decode() {
+            const input = document.getElementById('input').value;
+            try {
+                const decoded = atob(input); // Base64 decode
+                document.getElementById('output').value = decoded;
+            } catch (e) {
+                alert('Invalid encoded text. Please paste a valid Base64 string.');
+            }
+        }
+    </script>
+</body>
+</html>
